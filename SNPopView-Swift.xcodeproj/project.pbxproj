@@ -14,6 +14,7 @@
 		76F2A9121DBA303200F498D9 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 76F2A9101DBA303200F498D9 /* LaunchScreen.storyboard */; };
 		76F2A91D1DBA303200F498D9 /* SNPopView_SwiftTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76F2A91C1DBA303200F498D9 /* SNPopView_SwiftTests.swift */; };
 		76F2A9281DBA303200F498D9 /* SNPopView_SwiftUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76F2A9271DBA303200F498D9 /* SNPopView_SwiftUITests.swift */; };
+		76F2A9361DBA319300F498D9 /* SNPopView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76F2A9351DBA319300F498D9 /* SNPopView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -47,6 +48,7 @@
 		76F2A9231DBA303200F498D9 /* SNPopView-SwiftUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "SNPopView-SwiftUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		76F2A9271DBA303200F498D9 /* SNPopView_SwiftUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SNPopView_SwiftUITests.swift; sourceTree = "<group>"; };
 		76F2A9291DBA303200F498D9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		76F2A9351DBA319300F498D9 /* SNPopView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SNPopView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -103,6 +105,7 @@
 				76F2A90E1DBA303200F498D9 /* Assets.xcassets */,
 				76F2A9101DBA303200F498D9 /* LaunchScreen.storyboard */,
 				76F2A9131DBA303200F498D9 /* Info.plist */,
+				76F2A9351DBA319300F498D9 /* SNPopView.swift */,
 			);
 			path = "SNPopView-Swift";
 			sourceTree = "<group>";
@@ -260,6 +263,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				76F2A90A1DBA303200F498D9 /* ViewController.swift in Sources */,
+				76F2A9361DBA319300F498D9 /* SNPopView.swift in Sources */,
 				76F2A9081DBA303200F498D9 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
