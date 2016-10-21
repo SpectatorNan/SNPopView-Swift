@@ -52,17 +52,24 @@ extension SNPopView {
         if let headerView = self.delegate?.snpopView?(forHeader: self) {
             headerView.frame = setFrameOnTopOf(view: contentView, height: headerView.frame.height)
             self.addSubview(headerView)
+        } else {
+          //MARK:  顶部圆角
         }
         
         if let footerView = self.delegate?.snpopView?(forFooter: self) {
             footerView.frame = setFrameOnBottomOf(view: contentView, height: footerView.frame.height)
             self.addSubview(footerView)
+        } else {
+            //MARK: 底部圆角
         }
     }
     
      func dismiss() {
+        // MARK: 动画无效
+        UIView.animate(withDuration: 2.0) { 
+            self.removeFromSuperview()
+        }
         
-        self.removeFromSuperview()
     }
     
 }
