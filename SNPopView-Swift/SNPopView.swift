@@ -24,8 +24,7 @@ class SNPopView: UIView {
     convenience init() {
     self.init(frame: UIScreen.main.bounds)
     
-    self.backgroundColor = UIColor.lightGray
-    self.alpha = 0.3
+    self.backgroundColor = UIColor(white: 0, alpha: 0.3)
     }
     
    
@@ -65,11 +64,14 @@ extension SNPopView {
     }
     
      func dismiss() {
-        // MARK: 动画无效
-        UIView.animate(withDuration: 2.0) { 
-            self.removeFromSuperview()
-        }
         
+        UIView.animate(withDuration: 0.8, animations: {
+            self.alpha = 0
+        }) { (valid) in
+            if valid {
+                self.removeFromSuperview()
+            }
+        }
     }
     
 }
