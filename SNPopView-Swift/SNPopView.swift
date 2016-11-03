@@ -7,8 +7,10 @@
 //
 
 import UIKit
+import Foundation
 
-class SNPopView: UIView {
+//@objc(SNPopView)
+ class SNPopView: UIView {
     var title: String?
 //   lazy var contentArr: Array<Any> = { [unowned self] in
 //    let result = self.dataSource?.snpopView(models: self)
@@ -20,6 +22,7 @@ class SNPopView: UIView {
     
     var delegate: SNPopViewDelegate?
     var dataSource: SNPopViewDataSource?
+    var frameDelegate: SNPopViewFrameDelegate?
     fileprivate var top: UIView?
 //    fileprivate var mid: UIView?
     fileprivate var bottom: UIView?
@@ -57,6 +60,16 @@ extension SNPopView {
         let height = snPopScreenHeight*0.3
         
         let contentView = UITableView(frame: setFrameByCenter(width: width, height: height))
+        
+//        if let size = self.delegate?.snpopView?(forSize: self) {
+//            contentView.frame.size = size
+//        }
+        
+        if let size = self.frameDelegate?.snpopViewSize(popView: self) {
+//            contentView.frame.size = size
+            contentView.frame = setFrameByCenter(width: size.width, height: size.height)
+        }
+        
         contentView.dataSource = self
         contentView.delegate = self
         contentView.alpha = 1
@@ -69,6 +82,8 @@ extension SNPopView {
             self.addSubview(headerView)
         } else {
           //MARK:  顶部圆角
+            
+            
         }
         
         if let footerView = self.delegate?.snpopView?(forFooter: self) {
@@ -77,21 +92,27 @@ extension SNPopView {
             self.addSubview(footerView)
         } else {
             //MARK: 底部圆角
+            
         }
     }
     
      func dismiss() {
+        
 
-        UIView.animate(withDuration: 0.8, animations: { 
+        UIView.animate(withDuration: 0.8, animations: {
             self.alpha = 0
             }) { (valid) in
                 if valid {
+                    self.top?.removeFromSuperview()
+                    self.bottom?.removeFromSuperview()
+                    
                     self.table = nil
                     self.top = nil
                     self.bottom = nil
 //                    self.contentArr = nil
                     self.removeFromSuperview()
 //                    self.alpha = 1
+                    
                 }
         }
     }
@@ -115,7 +136,6 @@ extension SNPopView: UITableViewDataSource {
 extension SNPopView: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-//        self.delegate?.snpopView?(popView: self,didSelcted: contentArr[indexPath.row])
         self.delegate?.snpopView?(popView: self, didSelcted: tableView.cellForRow(at: indexPath)!, model: contentArr?[indexPath.row])
     }
     
@@ -149,14 +169,19 @@ func setFrameOnBottomOf(view:UIView, height: CGFloat) -> CGRect {
     return CGRect(x: x, y: y, width: view.frame.size.width, height: height)
 }
 
-@objc protocol SNPopViewDelegate {
+@objc protocol SNPopViewDelegate: NSObjectProtocol {
     
    @objc optional func snpopView(forFooter popView: SNPopView) -> UIView?
    @objc optional func snpopView(forHeader popView: SNPopView) -> UIView?
     @objc optional func snpopView(popView: SNPopView, didSelcted row:UITableViewCell,model rowModel: Any)
+//    @objc optional func snpopView(forSize popView: SNPopView) -> CGRect?
  }
 
-protocol SNPopViewDataSource {
+protocol SNPopViewFrameDelegate {
+    func snpopViewSize(popView: SNPopView) -> CGSize?
+}
+
+protocol SNPopViewDataSource: NSObjectProtocol {
     func snpopView(contentView popView: SNPopView,tableView table: UITableView,  cellForRowAt indexPath: IndexPath) -> UITableViewCell
     func snpopView(models popView: SNPopView) -> Array<Any>
 }
